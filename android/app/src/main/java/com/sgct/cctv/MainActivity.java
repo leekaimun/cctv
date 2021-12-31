@@ -14,8 +14,9 @@ public class MainActivity extends FlutterActivity {
         new MethodChannel(flutterEngine.getDartExecutor().getBinaryMessenger(), CHANNEL)
                 .setMethodCallHandler(
                         (call, result) -> {
-                            // Note: this method is invoked on the main thread.
-                            // TODO
+                          if (call.method.equals("loadLibraries")) {
+                            result.success("Quick brown fox 2");
+                          }
                         }
                 );
     }
