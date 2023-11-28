@@ -5,19 +5,21 @@ import io.flutter.embedding.android.FlutterActivity;
 import io.flutter.embedding.engine.FlutterEngine;
 import io.flutter.plugin.common.MethodChannel;
 
-public class MainActivity extends FlutterActivity {
-    private static final String CHANNEL = "com.sgct.cctv/netsdk";
+import com.company.netsdk.common.NetSDKLib;
 
-    @Override
-    public void configureFlutterEngine(@NonNull FlutterEngine flutterEngine) {
-        super.configureFlutterEngine(flutterEngine);
-        new MethodChannel(flutterEngine.getDartExecutor().getBinaryMessenger(), CHANNEL)
-                .setMethodCallHandler(
-                        (call, result) -> {
-                          if (call.method.equals("loadLibraries")) {
-                            result.success("Quick brown fox 2");
-                          }
-                        }
-                );
-    }
+public class MainActivity extends FlutterActivity {
+	private static final String CHANNEL = "com.sgct.cctv/netsdk";
+
+	@Override
+	public void configureFlutterEngine(@NonNull FlutterEngine flutterEngine) {
+		super.configureFlutterEngine(flutterEngine);
+		new MethodChannel(flutterEngine.getDartExecutor().getBinaryMessenger(), CHANNEL)
+				.setMethodCallHandler(
+						(call, result) -> {
+							if (call.method.equals("loadLibraries")) {
+								NetSDKLib.getInstance().init();
+								result.success("Quick brown fox 2");
+							}
+						});
+	}
 }

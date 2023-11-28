@@ -50,6 +50,10 @@ android {
     }
 }
 
+dependencies {
+		implementation files('../../cctv_libs/INetSDK.jar')
+}
+
 flutter {
     source '../..'
 }
